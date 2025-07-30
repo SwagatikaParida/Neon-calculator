@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Calculator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(120deg, #001f3f, #003366, #000000);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .calculator {
+      background: rgba(0, 27, 44, 0.9);
+      border: 2px solid #0ff;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #0ff;
+      padding: 15px;
+      width: 320px;
+      max-width: 90%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .display {
+      background: #100033;
+      color: #0ff;
+      font-size: 1.6rem;
+      height: 60px;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      padding: 10px;
+      text-align: right;
+      overflow-x: auto;
+      box-shadow: inset 0 0 10px #0ff;
+    }
+
+    .keys {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid #0ff;
+      color: #fff;
+      font-size: 1.2rem;
+      padding: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 10px #0ff;
+    }
+
+    button:hover {
+      background: rgba(0, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    .span-2 {
+      grid-column: span 2;
+      background: orange;
+      border: none;
+      color: black;
+      font-weight: bold;
+    }
+
+    @media (max-width: 500px) {
+      .calculator {
+        width: 90%;
+      }
+      button {
+        padding: 12px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" class="display" disabled />
+    <div class="keys">
+      <button class="span-2" onclick="clearDisplay()">AC</button>
+      <button onclick="deleteChar()">DEL</button>
+      <button onclick="appendChar('/')">÷</button>
+      <button onclick="appendChar('7')">7</button>
+      <button onclick="appendChar('8')">8</button>
+      <button onclick="appendChar('9')">9</button>
+      <button onclick="appendChar('*')">×</button>
+      <button onclick="appendChar('4')">4</button>
+      <button onclick="appendChar('5')">5</button>
+      <button onclick="appendChar('6')">6</button>
+      <button onclick="appendChar('-')">−</button>
+      <button onclick="appendChar('1')">1</button>
+      <button onclick="appendChar('2')">2</button>
+      <button onclick="appendChar('3')">3</button>
+      <button onclick="appendChar('+')">+</button>
+      <button onclick="appendChar('0')">0</button>
+      <button onclick="appendChar('.')">.</button>
+      <button class="span-2" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <script>
+    const display = document.querySelector('.display');
+
+    function appendChar(char) {
+      display.value += char;
+    }
+
+    function clearDisplay() {
+      display.value = '';
+    }
+
+    function deleteChar() {
+      display.value = display.value.slice(0, -1);
+    }
+
+    function calculate() {
+      try {
+        display.value = eval(display.value);
+      } catch {
+        display.value = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
